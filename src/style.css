@@ -1,0 +1,16 @@
+:root{
+    --dominant: #031927;
+    --light-dominant: #093b5a;
+    --dark-aqua: #508aa8;
+    --aqua: #9dd1f1;
+    --light-aqua: #c8e0f4;
+    --red: #ba1200;
+}
+body{
+    background: linear-gradient(45deg, var(--dominant), 75%,  var(--light-dominant));
+    background-repeat: no-repeat;
+    height: 100vh;
+}
+h1{
+    color:  var(--light-aqua);
+}

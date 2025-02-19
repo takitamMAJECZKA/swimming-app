@@ -1,0 +1,21 @@
+{
+    "*workoutName*":{
+        "index": 1,
+        "time": "*obliczony czas przez moj genialny script*",
+        "meters": "*obliczona dlugosc przez moj genialny script*",
+        "exce": [
+            {
+                "time": 120,
+                "distance": 400
+            },
+            {
+                "time": 140,
+                "distance": 421
+            },
+            {
+                "time": 435,
+                "distance": 4123
+            }
+        ]
+    }
+}
