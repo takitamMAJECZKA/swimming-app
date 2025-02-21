@@ -21,11 +21,6 @@ body{
     height: 100vh;
 }
 
-@media (max-width: 500px) {
-    #loginFormContainer, #registerFormContainer{
-        min-width: calc(100vw - 60px);
-    }
-}
 
 #loginPage{
     width: 100%;
@@ -98,3 +93,12 @@ body{
     color: var(--red);
 }
 
+#email:valid{
+    color: green;
+}
+
+@media (width <= 500px) {
+    #loginFormContainer, #registerFormContainer{
+        min-width: calc(100vw - 100px);
+    }
+}

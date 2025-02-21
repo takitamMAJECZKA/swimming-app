@@ -23,8 +23,9 @@ export default function LoginForm(){
                 <form>
                     <h2 id="registerHeader">REGISTER</h2>
                     <label>Username: <input type="text" id="username"/></label>
+                    <label>E-mail: <input type="email" id="email"/></label>
                     <label>Password: <input type="password" id="password"/></label>
-                    <p id="registerError">Account with that username already exists.</p>
+                    <p id="registerError">Account with that username or email already exists.</p>
                     <p>You already have an account? <span id="changeToLogin" onClick={()=>{setReturnLogin(true)}}>Login.</span></p>
                 </form>
                 <button id="registerBtn">Register</button>
