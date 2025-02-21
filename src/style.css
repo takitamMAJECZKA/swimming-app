@@ -4,13 +4,94 @@
     --dark-aqua: #508aa8;
     --aqua: #9dd1f1;
     --light-aqua: #c8e0f4;
+    --almost-white: #bee6ff;
     --red: #ba1200;
 }
+
+#root{
+    height: 100%;
+    width: 100%;
+}
+
 body{
     background: linear-gradient(45deg, var(--dominant), 75%,  var(--light-dominant));
     background-repeat: no-repeat;
+    font-family: 'Courier New', Courier, monospace;
+    color: var(--light-aqua);
     height: 100vh;
 }
-h1{
-    color:  var(--light-aqua);
+
+#loginPage{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#loginFormContainer, #registerFormContainer{
+    font-size: 150%;
+    width: 35vw;
+    height: 60vh;
+    min-height: 600px;
+    min-width: 400px;
+    background: radial-gradient(var(--light-dominant), 7% ,var(--dominant) 90%);
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+}
+
+#loginFormContainer > form, #registerFormContainer > form{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+#loginHeader, #registerHeader{
+    font-size: 200%;
+}
+
+#loginFormContainer form label, #registerFormContainer form label{
+    margin-bottom: 40px;
+}
+
+#loginFormContainer label input, #registerFormContainer label input{
+    font-size: 75%;
+    border-radius: 5px;
+}
+
+
+#loginBtn, #registerBtn{
+    all: unset;
+    cursor: pointer;
+    background-color: var(--aqua);
+    color: var(--dominant);
+    padding: 10px 12.5vw;
+    border-radius: 10px;
+    transition: all 0.3s;
+}
+
+#loginBtn:hover, #registerBtn:hover{
+    background-color: var(--almost-white);
+}
+
+#changeToRegister, #changeToLogin{
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#loginError, #registerError{
+    display: block;
+    font-size: 80%;
+    margin: 0;
+    padding: 0;
+    color: var(--red);
+}
+
+@media screen and (max-width: 500px) {
+    
 }
