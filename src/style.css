@@ -21,7 +21,7 @@ body{
     height: 100vh;
 }
 
-@media screen and (max-width: 500px) {
+@media (max-width: 500px) {
     #loginFormContainer, #registerFormContainer{
         min-width: calc(100vw - 60px);
     }
