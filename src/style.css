@@ -99,6 +99,6 @@ body{
 
 @media (width <= 500px) {
     #loginFormContainer, #registerFormContainer{
-        min-width: calc(100vw - 100px);
+        min-width: calc(100vw - 60px);
     }
 }

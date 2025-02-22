@@ -3,7 +3,8 @@
         "index": 1,
         "time": "*obliczony czas przez moj genialny script*",
         "meters": "*obliczona dlugosc przez moj genialny script*",
-        "exce": [
+        "date": "*data*",
+        "exercise": [
             {
                 "time": 120,
                 "distance": 400
