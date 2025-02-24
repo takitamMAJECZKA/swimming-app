@@ -19,6 +19,7 @@ body{
     font-family: 'Courier New', Courier, monospace;
     color: var(--light-aqua);
     height: auto;
+    min-height: 100vh;
 }
 
 
@@ -112,7 +113,7 @@ button{
 
 #addNewWorkout{
     margin-top: 20px;
-    width: 35vh;
+    min-width: 250px;
     height: 20vh;
     background-color: #000;
     border-radius: 20px;
@@ -145,7 +146,7 @@ button{
 .workoutContainer{
     margin-top: 20px;
     padding: 15px;
-    width: 40vh;
+    min-width: 360px;
     height: auto;
     background-color: #000;
     border-radius: 20px;
@@ -156,11 +157,11 @@ button{
 .workoutInfo{
     display: grid;
     grid-template-rows: repeat(2, 1fr);
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     row-gap: 10px;
     grid-template-areas: 
-    '   date   date   date   '
-    '   .   .   .  ';
+    '   date   date   '
+    '   .   .  ';
     font-size: 120%;
     margin-bottom: 20px;
 }
@@ -168,9 +169,13 @@ button{
     text-align: center;
     grid-area: date;
 }
+.workoutDistance, .workoutTime{
+    text-align: center;
+}
+
 .workoutHeader > label{
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
 }
 
@@ -229,6 +234,21 @@ button{
 .exerciseName{
     font-size: 120%;
     font-weight: bolder;
+}
+
+.exerciseButtons{
+    width: 100%;
+    padding: 10px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.moveUpButton, .moveDownButton, .deleteButton{
+    border: 1px solid var(--aqua);
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 10px;
 }
 
 .dataInputsWrapper{

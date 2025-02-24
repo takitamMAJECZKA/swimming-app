@@ -31,6 +31,21 @@ export default function Workout(){
         setContent(c => [...c, {type:'break'}])
     }
 
+    function handleElementUp(index){
+        if(index > 0){
+            let updatedContent = content;
+            [updatedContent[index] , updatedContent[index-1]] = [updatedContent[index] , updatedContent[index-1]];
+            setContent(updatedContent)
+        }
+    }
+
+    function handleElementDown(index){
+        
+    }
+    function handleElementDelete(index){
+        let updatedContent = content.filter((element, i) => index!==i )
+        setContent(updatedContent)
+    }
     function getMonthString(){
         switch(date.getMonth()){
             case 0:
@@ -68,20 +83,25 @@ export default function Workout(){
                     <div className="workoutDate">{date.getDate()} {getMonthString()} {date.getFullYear()}</div>
                     <div className="workoutDistance">{distance} m</div>
                     <div className="workoutTime">{timeLong} seconds</div>
-                    <div className="workoutTime">Pace: 000</div>
                 </div>
             </div>
             <div className="exercisesAndBreaksWrapper">
-                {content.map((element, index)=>{
-                    return(
-                    <Exercise key={index}/>
-                    )
+                {content.map((element, i)=>{
+                    if (element.type == 'exercise'){
+                        return(
+                        <Exercise key={i} index={i} deleteFunc={handleElementDelete} moveUpFunc={handleElementUp} moveDownFunc={handleElementDown}/>
+                        )
+                    }else{
+                        return(
+                            <Break key={i}/>
+                            )
+                    }
                 })}
                 <Break />
             </div>
             <div className="addElements">
                 <button className="addExercise" onClick={() => {handleAddExercise()}}>add exercise</button>
-                <button className="addBreak">add break</button>
+                <button className="addBreak" onClick={() => {handleAddBreak()}}>add break</button>
             </div>
         </div>
     )

@@ -1,11 +1,11 @@
 import { useState } from "react"
 import editIcon from "../assets/editIcon.png"
 
-export default function Exercise(){
+export default function Exercise(props){
 
     let [distance, setDistance] = useState(0)
     let [time, setTime] = useState('NaN:NaN')
-    let [exerciseName, setExerciseName] = useState('Exercise')
+    let [exerciseName, setExerciseName] = useState('Exercise '+String(props.index+1))
 
 
     function handleAmountOfPoolsChange(e){
@@ -47,6 +47,11 @@ export default function Exercise(){
             <div className="exerciseCalculations">
                 <div className="exerciseDistance">Distance(m): {distance}</div>
                 <div className="exercisePace">Pace(/100m): {convertToMins(convertToSecs(time)/(distance/100)) != 'NaN:NaN' ? convertToMins(convertToSecs(time)/(distance/100)) : '00:00'}</div>
+            </div>
+            <div className="exerciseButtons">
+                <button className="moveUpButton" onClick={()=>props.moveUpFunc(props.index)}>UP</button>
+                <button className="deleteButton" onClick={()=>props.deleteFunc(props.index)}>X</button>
+                <button className="moveDownButton" onClick={()=>props.moveDownFunc(props.index)}>DOWN</button>
             </div>
         </div>
     )
