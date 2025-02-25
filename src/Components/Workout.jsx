@@ -43,7 +43,7 @@ export default function Workout(){
         
     }
     function handleElementDelete(index){
-        let updatedContent = content.filter((element, i) => index!==i )
+        let updatedContent = content.filter((_, i) => i!=index )
         setContent(updatedContent)
     }
     function getMonthString(){
@@ -93,7 +93,7 @@ export default function Workout(){
                         )
                     }else{
                         return(
-                            <Break key={i}/>
+                            <Break/>
                             )
                     }
                 })}

@@ -2,22 +2,19 @@ import { useState } from "react"
 import editIcon from "../assets/editIcon.png"
 
 export default function Exercise(props){
-
-    let [distance, setDistance] = useState(0)
-    let [time, setTime] = useState('NaN:NaN')
-    let [exerciseName, setExerciseName] = useState('Exercise '+String(props.index+1))
+    let [exerciseInfo, setExerciseInfo] = useState({index: props.index,name:'Exercise '+String(props.index+1), distance: 0, time:'NaN:NaN'})
 
 
     function handleAmountOfPoolsChange(e){
-        setDistance(e.target.value*25)
+        setExerciseInfo({...exerciseInfo , distance: e.target.value*25})
     }
 
     function handleTimeChange(e){
-        setTime(e.target.value)
+        setExerciseInfo({...exerciseInfo , time: e.target.value})
     }
 
     function handleExerciseNameChange(e){
-        setExerciseName(e.target.value)
+        setExerciseInfo({...exerciseInfo , name: e.target.value})
     }
 
     function convertToSecs(mmss){
@@ -39,19 +36,19 @@ export default function Exercise(props){
 
     return(
         <div className="exercise">
-            <label><input type="text" onChange={(e) => {handleExerciseNameChange(e)}} className="exerciseName dataInput" placeholder="Exercise name" value={exerciseName}/><img className="editIcon" src={editIcon} alt="edit" /></label>
+            <label><input type="text" onChange={(e) => {handleExerciseNameChange(e)}} className="exerciseName dataInput" placeholder="Exercise name" value={exerciseInfo.name}/><img className="editIcon" src={editIcon} alt="edit" /></label>
             <div className="dataInputsWrapper">
                 <label>Amount of pools(25m): <input type="number" min={0} onChange={(e)=>{handleAmountOfPoolsChange(e)}} className="dataInput exercisePoolsInput"/></label>
                 <label>Time(mm:ss): <input type="text" placeholder="mm:ss"onChange={(e)=>{handleTimeChange(e)}} className="dataInput exerciseTimeInput"/></label>
             </div>
             <div className="exerciseCalculations">
-                <div className="exerciseDistance">Distance(m): {distance}</div>
-                <div className="exercisePace">Pace(/100m): {convertToMins(convertToSecs(time)/(distance/100)) != 'NaN:NaN' ? convertToMins(convertToSecs(time)/(distance/100)) : '00:00'}</div>
+                <div className="exerciseDistance">Distance(m): {exerciseInfo.distance}</div>
+                <div className="exercisePace">Pace(/100m): {convertToMins(convertToSecs(exerciseInfo.time)/(exerciseInfo.distance/100)) != 'NaN:NaN' ? convertToMins(convertToSecs(exerciseInfo.time)/(exerciseInfo.distance/100)) : '00:00'}</div>
             </div>
             <div className="exerciseButtons">
-                <button className="moveUpButton" onClick={()=>props.moveUpFunc(props.index)}>UP</button>
-                <button className="deleteButton" onClick={()=>props.deleteFunc(props.index)}>X</button>
-                <button className="moveDownButton" onClick={()=>props.moveDownFunc(props.index)}>DOWN</button>
+                <button className="moveDownButton" onClick={()=>props.moveDownFunc(exerciseInfo.index)}>DOWN</button>
+                <button className="deleteButton" onClick={()=>{props.deleteFunc(exerciseInfo.index)}}>X</button>
+                <button className="moveUpButton" onClick={()=>props.moveUpFunc(exerciseInfo.index)}>UP</button>
             </div>
         </div>
     )
