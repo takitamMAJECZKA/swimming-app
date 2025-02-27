@@ -1,10 +1,13 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import editIcon from "../assets/editIcon.png"
 
 export default function Exercise(props){
-    let [exerciseInfo, setExerciseInfo] = useState({index: props.index,name:'Exercise '+String(props.index+1), distance: 0, time:'NaN:NaN'})
+    let [exerciseInfo, setExerciseInfo] = useState({id: props.id, name:'Exercise '+String(props.index+1), type:'exercise', distance: 0, time:'NaN:NaN'})
 
-
+    useEffect(()=>{
+        props.updateData(exerciseInfo)
+    }, [exerciseInfo])
+    
     function handleAmountOfPoolsChange(e){
         setExerciseInfo({...exerciseInfo , distance: e.target.value*25})
     }
@@ -38,17 +41,15 @@ export default function Exercise(props){
         <div className="exercise">
             <label><input type="text" onChange={(e) => {handleExerciseNameChange(e)}} className="exerciseName dataInput" placeholder="Exercise name" value={exerciseInfo.name}/><img className="editIcon" src={editIcon} alt="edit" /></label>
             <div className="dataInputsWrapper">
-                <label>Amount of pools(25m): <input type="number" min={0} onChange={(e)=>{handleAmountOfPoolsChange(e)}} className="dataInput exercisePoolsInput"/></label>
-                <label>Time(mm:ss): <input type="text" placeholder="mm:ss"onChange={(e)=>{handleTimeChange(e)}} className="dataInput exerciseTimeInput"/></label>
+                <label>Liczba basenów(25m): <input type="number" min={0} onChange={(e)=>{handleAmountOfPoolsChange(e)}} className="dataInput exercisePoolsInput"/></label>
+                <label>Czas(mm:ss): <input type="text" placeholder="mm:ss"onChange={(e)=>{handleTimeChange(e)}} className="dataInput exerciseTimeInput"/></label>
             </div>
             <div className="exerciseCalculations">
-                <div className="exerciseDistance">Distance(m): {exerciseInfo.distance}</div>
-                <div className="exercisePace">Pace(/100m): {convertToMins(convertToSecs(exerciseInfo.time)/(exerciseInfo.distance/100)) != 'NaN:NaN' ? convertToMins(convertToSecs(exerciseInfo.time)/(exerciseInfo.distance/100)) : '00:00'}</div>
+                <div className="exerciseDistance">Dystans(m): {exerciseInfo.distance}</div>
+                <div className="exercisePace">Tempo(/100m): {convertToMins(convertToSecs(exerciseInfo.time)/(exerciseInfo.distance/100)) != 'NaN:NaN' ? convertToMins(convertToSecs(exerciseInfo.time)/(exerciseInfo.distance/100)) : '00:00'}</div>
             </div>
             <div className="exerciseButtons">
-                <button className="moveDownButton" onClick={()=>props.moveDownFunc(exerciseInfo.index)}>DOWN</button>
-                <button className="deleteButton" onClick={()=>{props.deleteFunc(exerciseInfo.index)}}>X</button>
-                <button className="moveUpButton" onClick={()=>props.moveUpFunc(exerciseInfo.index)}>UP</button>
+                <button className="deleteButton" onClick={()=>{props.deleteFunc(exerciseInfo.id)}}>X</button>
             </div>
         </div>
     )
