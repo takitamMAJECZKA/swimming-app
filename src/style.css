@@ -12,6 +12,9 @@
     height: 100%;
     width: 100%;
 }
+*{
+    font-family: 'Courier New', Courier, monospace;
+}
 
 body{
     background: linear-gradient(45deg, var(--dominant), 75%,  var(--light-dominant));
@@ -200,7 +203,7 @@ button{
     cursor: pointer;
 }
 
-.exercise{
+.exercise, .break{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -210,14 +213,26 @@ button{
     margin-bottom: 20px;
 }
 
+.breakName{
+    margin: 0;
+    margin-top: 10px;
+    color: var(--aqua);
+    font-size: 130%;
+    font-weight: bold;
+}
+
 .exercise > label{
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.exercisePoolsInput, .exerciseTimeInput{
+.exercisePoolsInput, .exerciseTimeInput, .breakTimeInput{
     border: 1px solid var(--aqua);
+    text-align: center;
+    border-radius: 5px;
+    width: 30%;
+
 }
 
 .exerciseCalculations{
@@ -236,7 +251,7 @@ button{
     font-weight: bolder;
 }
 
-.exerciseButtons{
+.exerciseButtons, .breakButtons{
     width: 100%;
     padding: 10px;
     display: flex;
@@ -257,6 +272,7 @@ button{
     align-items: center;
     flex-direction: column;
     text-align: center;
+    padding: 5px;
 }
 
 .addElements{

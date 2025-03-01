@@ -14,7 +14,10 @@ export default function Workout(){
     function handleWorkoutNameChange(e){
         setWorkoutData({...workoutData, name: e.target.value})
     }
-    useEffect(() => onContentChange(), [content])
+
+    useEffect(() => {
+        onContentChange()
+    }, [content])
 
     function onContentChange(){
         let calculateTime = 0;
@@ -35,7 +38,7 @@ export default function Workout(){
     }
     
     function handleAddBreak(){
-        setContent(c => [...c, {type:'break'}])
+        setContent(c => [...c, {type:'break', id: uuidv4()}])
     }
 
     function handleElementDelete(id){
@@ -50,6 +53,14 @@ export default function Workout(){
                 if(element.id == elementData.id){
                     element.name = elementData.name;
                     element.distance = elementData.distance;
+                    element.time = elementData.time;
+                    setContent([...content])
+                }
+            })
+        }else{
+            content.map((element) => {
+                if(element.id == elementData.id){
+                    element.name = elementData.name;
                     element.time = elementData.time;
                     setContent([...content])
                 }
@@ -104,11 +115,10 @@ export default function Workout(){
                         )
                     }else{
                         return(
-                            <Break/>
+                            <Break key={element.id} id={element.id} index={i} updateData={updateData} deleteFunc={handleElementDelete}/>
                             )
                     }
                 })}
-                <Break />
             </div>
             <div className="addElements">
                 <button className="addExercise" onClick={() => {handleAddExercise()}}>Dodaj ćwiczenie</button>
