@@ -2,30 +2,36 @@ import { useState, useEffect } from "react";
 import editIcon from "../assets/editIcon.png"
 import Exercise from "./Exercise";
 import Break from "./Break";
+import {convertMinsToSecs, convertSecsToHours} from '../TimeCalculate.js'
 import {v4 as uuidv4} from 'uuid'
 
 export default function Workout(){
     let date = new Date();
 
     let [content, setContent] = useState([])
-    let [workoutData, setWorkoutData] = useState({name: 'Workout', timeLong: 0, distance: 0, workoutDate: date ,elementsIn: [...content]})
+    let [workoutData, setWorkoutData] = useState({name: 'Trening', timeLong: 0, distance: 0, workoutDate: date ,elementsIn: [...content]})
     
     function handleWorkoutNameChange(e){
         setWorkoutData({...workoutData, name: e.target.value})
     }
+    useEffect(() => onContentChange(), [content])
 
-    function updateTimeLong(addedTime){
-        setWorkoutData({...workoutData, time: workoutData.time + addedTime})
-    }
-
-    function updateDistance(addedDistance){
-        setWorkoutData({...workoutData, distance: workoutData.distance + addedDistance})
-
+    function onContentChange(){
+        let calculateTime = 0;
+        let calculateDistance = 0;
+        content.forEach((element) => {
+            if(convertMinsToSecs(element.time)!=NaN){
+                calculateTime += convertMinsToSecs(element.time);
+            }else{
+                setWorkoutData({...workoutData, timeLong: 0})
+            }
+            calculateDistance += element.distance;
+        })
+        setWorkoutData({...workoutData, timeLong: convertSecsToHours(calculateTime), distance: calculateDistance})
     }
 
     function handleAddExercise(){
         setContent(c => [...c, {type:'exercise', id: uuidv4()}])
-        console.log(content);
     }
     
     function handleAddBreak(){
@@ -76,7 +82,7 @@ export default function Workout(){
             case 10:
                 return'Listopad'
             case 11:
-                return'Grudzieńs'
+                return'Grudzień'
         }
     }
 
@@ -86,8 +92,8 @@ export default function Workout(){
                 <label><input type="text" onChange={(e) => {handleWorkoutNameChange(e)}} className="workoutName dataInput" placeholder="Workout name" value={workoutData.name}/><img className="editIcon" src={editIcon} alt="edit" /></label>
                 <div className="workoutInfo">
                     <div className="workoutDate">{date.getDate()} {getMonthString()} {date.getFullYear()}</div>
-                    <div className="workoutDistance">{workoutData.distance} m</div>
-                    <div className="workoutTime">{workoutData.timeLong} seconds</div>
+                    <div className="workoutDistance">{workoutData.distance > 1000 ? `${workoutData.distance/1000} km` : `${workoutData.distance} m`}</div>
+                    <div className="workoutTime">{workoutData.timeLong=="NaN:NaN:NaN" ? '00:00:00': workoutData.timeLong}(hh:mm:ss)</div>
                 </div>
             </div>
             <div className="exercisesAndBreaksWrapper">

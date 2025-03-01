@@ -276,4 +276,7 @@ button{
     #loginFormContainer, #registerFormContainer{
         min-width: calc(100vw - 60px);
     }
+    .workoutContainer{
+        max-width: calc(100vw - 30px);
+    }
 }
