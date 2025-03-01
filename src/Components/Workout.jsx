@@ -28,7 +28,9 @@ export default function Workout(){
             }else{
                 setWorkoutData({...workoutData, timeLong: 0})
             }
-            calculateDistance += element.distance;
+            if(element.distance != undefined){
+                calculateDistance += element.distance;
+            }
         })
         setWorkoutData({...workoutData, timeLong: convertSecsToHours(calculateTime), distance: calculateDistance})
     }
